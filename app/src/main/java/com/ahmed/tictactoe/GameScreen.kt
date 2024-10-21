@@ -35,16 +35,15 @@ fun GameBox(modifier: Modifier = Modifier, stateChanger: (winner: String) -> Uni
     val gridVals = remember { mutableStateListOf(*Array(9) { Players.NULL }) }
     var gameEnd by remember { mutableStateOf(false) }
     when (totalTurns.intValue) {
-        in 5..8 -> {
+        in 5..9 -> {
             if (gameEnd) {
-                if (totalTurns.intValue % 2 == 0)
-                    stateChanger("CIRCLE WON THE GAME NIGGA")
-                else
-                    stateChanger("CROSS WON THE GAME NIGGA")
+                if (totalTurns.intValue % 2 == 0) stateChanger("CIRCLE WON THE GAME NIGGA")
+                else stateChanger("CROSS WON THE GAME NIGGA")
+            } else if (totalTurns.intValue == 9) {
+                stateChanger("GAME IS A DRAW NIGGA")
             }
         }
 
-        9 -> stateChanger("THE GAME IS A DRAW NIGGA")
     }
     LazyColumn(
         modifier,
